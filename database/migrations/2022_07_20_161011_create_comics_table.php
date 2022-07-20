@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateComicsTable extends Migration
+class CreateComicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,8 @@ class UpdateComicsTable extends Migration
      */
     public function up()
     {
-        Schema::table('comics', function (Blueprint $table) {
+        Schema::create('comics', function (Blueprint $table) {
+            $table->id();
             $table->string('title');
             $table->string('description');
             $table->string('thumb');
@@ -23,6 +24,7 @@ class UpdateComicsTable extends Migration
             $table->string('type');
             $table->string('artists');
             $table->string('writers');
+            $table->timestamps();
         });
     }
 
@@ -33,8 +35,6 @@ class UpdateComicsTable extends Migration
      */
     public function down()
     {
-        Schema::table('comics', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('comics');
     }
 }

@@ -2,6 +2,6 @@
 
 @section('mainContent')
     <main>
-        <h1>Home</h1>
+        <h1>Questo é un sito di fumetti</h1>
     </main>
 @endsection
