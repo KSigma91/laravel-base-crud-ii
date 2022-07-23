@@ -14,7 +14,15 @@ class ComicsController extends Controller
      */
     public function index()
     {
-        $comics = Comic::all();
+        $perPage = 6;
+
+        if ($perPage) {
+            $comics = Comic::paginate($perPage);
+        }
+
+        # per visualizzare tutti i comics senza pagination
+        //$comics = Comic::all();
+
         return view('admin.comics.index', compact('comics'));
     }
 
@@ -25,7 +33,7 @@ class ComicsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.comics.create');
     }
 
     /**
@@ -36,7 +44,23 @@ class ComicsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'      => 'required|string|max:100',
+            'description'     => 'string|max:255',
+            'thumb'    => 'string|max:255',
+            'price'   => 'string',
+            'series' => 'string|max:100',
+            'sale_date'     => 'date',
+            'type'   => 'string|max:100',
+            'artists'   => 'string|max:255',
+            'writers'   => 'string|max:255',
+        ]);
+
+        $formData = $request->all();
+
+        $comic = Comic::create($formData);
+
+        return redirect()->route('comics.show', ['comic' => $comic]);
     }
 
     /**
@@ -47,7 +71,7 @@ class ComicsController extends Controller
      */
     public function show(Comic $comic)
     {
-        //return view('admin.comics.show', compact('comic'));
+        return view('admin.comics.show', compact('comic'));
     }
 
     /**
@@ -56,9 +80,9 @@ class ComicsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comic $comic)
     {
-        //
+        return view('admin.comics.edit', compact('comic'));
     }
 
     /**
@@ -68,9 +92,25 @@ class ComicsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comic $comic)
     {
-        //
+        $request->validate([
+            'title'      => 'required|string|max:100',
+            'description'     => 'string|max:255',
+            'thumb'    => 'string|max:255',
+            'price'   => 'string',
+            'series' => 'string|max:100',
+            'sale_date'     => 'date',
+            'type'   => 'string|max:100',
+            'artists'   => 'string|max:255',
+            'writers'   => 'string|max:255',
+        ]);
+
+        $formData = $request->all();
+
+        $comic = Comic::create($formData);
+
+        return redirect()->route('comics.show', ['comic' => $comic]);
     }
 
     /**
@@ -79,8 +119,10 @@ class ComicsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+
+        return redirect()->route('comics.index');
     }
 }

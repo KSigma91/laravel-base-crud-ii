@@ -27603,6 +27603,24 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
+var deleteAlert = document.querySelectorAll('.alert');
+
+if (deleteAlert) {
+  var deleteCard = document.querySelectorAll('delete-card');
+  var deleteCheck = document.querySelector('.alert-spawn');
+  deleteCard.forEach(function (action) {
+    action.addEventListener('click', function () {
+      deleteAlert.classList.remove('d-none');
+      var id = this.closest('[data-id]').dataset.id;
+      var pattern = deleteCheck.dataset.action;
+      var newAction = pattern.replace('*****', id);
+      deleteCheck.action = newAction;
+    });
+  });
+  document.querySelector('.choice-no').addEventListener('click', function () {
+    deleteAlert.classList.add('d-none');
+  });
+}
 
 /***/ }),
 

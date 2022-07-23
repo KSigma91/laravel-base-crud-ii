@@ -15,15 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PagesController@home')->name('home');
 
-//Route::get('/cards', 'PagesController@cards')->name('cards');
-
-Route::get('/comics', 'PagesController@index', function () {
-    // $arrComics = config('comics');
-    // return view('cards', [
-    //     'arrComics' => $arrComics,
-    // ]);
-})->name('comics.index');
-Route::post('/comics', 'PagesController@store')->name('comics.store');
-
-
 Route::resource('/comics', 'ComicsController');

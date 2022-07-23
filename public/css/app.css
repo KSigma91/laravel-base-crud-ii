@@ -12155,17 +12155,7 @@ fieldset:disabled .btn {
   padding: 0;
 }
 
-main {
-  padding: 5px 5px;
-  width: 100%;
-  background: lightgoldenrodyellow;
-}
-
-li {
-  margin: 15px;
-}
-
-li > p {
-  padding: 10px 0;
+big {
+  font-weight: bolder;
 }
 
